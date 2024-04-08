@@ -1,9 +1,13 @@
 function Cell() {
-  const value = '';
+  const value = 0;
 
   const getValue = () => value;
 
-  return getValue;
+  const mark = (mark) => (value = mark);
+
+  const resetValue = () => (value = 0);
+
+  return { getValue, mark, resetValue };
 }
 
 function Board() {
@@ -11,7 +15,18 @@ function Board() {
 
   const getBoardCells = () => boardCells;
 
-  return getBoardCells;
+  const markCell = (cell, mark) => {
+    const cell = boardCells[cell.row][cell.column];
+    const value = cell.getValue();
+
+    if (value !== 0) {
+      return;
+    } else {
+      cell.mark(mark);
+    }
+  };
+
+  return { getBoardCells, markCell };
 }
 
 function GameController(players) {
