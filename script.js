@@ -22,10 +22,10 @@ function Board() {
     }
   }
 
-  const getBoardCells = () => boardCells;
+  const getBoardCells = () => board;
 
   const markCell = (cell, mark) => {
-    const cell = boardCells[cell.row][cell.column];
+    const cell = board[cell.row][cell.column];
     const value = cell.getValue();
 
     if (value !== 0) {
@@ -35,7 +35,21 @@ function Board() {
     }
   };
 
-  return { getBoardCells, markCell };
+  let boardWithCellValues = [];
+
+  const printBoard = () => {
+    boardWithCellValues = board.map((row) => {
+      row.map((cell) => cell.getValue());
+    });
+  };
+
+  const resetBoard = () => {
+    boardWithCellValues = board.map((row) => {
+      row.map((cell) => cell.resetValue());
+    });
+  };
+
+  return { getBoardCells, markCell, printBoard, resetBoard };
 }
 
 function GameController(players) {
