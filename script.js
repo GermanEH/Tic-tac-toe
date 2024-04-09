@@ -28,7 +28,25 @@ function GameController(playersData) {
     }
   };
 
-  return { switchTurn, getScore };
+  const playTurn = (cell) => {
+    if (!cell.row || !cell.column) {
+      return;
+    } else {
+      board.markCell(cell);
+    }
+    const winner = checkWinner();
+    if (winner) {
+      return winner;
+    } else {
+      switchTurn();
+      printNewTurn();
+    }
+  };
+
+  const checkWinner = () => {};
+  const printNewTurn = () => {};
+
+  return { switchTurn, getActivePlayer, getScore, playTurn };
 }
 
 function ScreenController() {
