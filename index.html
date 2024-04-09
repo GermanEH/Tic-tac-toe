@@ -11,12 +11,21 @@
     <div id="bgAnimation"></div>
     <div class="optionsContainer"></div>
     <div id="loginContainer">
-        <audio src=""></audio>
+        <div class="musicContainer">
+            <img src="" alt="" id="volumeLogo">
+            <div class="customControls">
+                <img src="" alt="" id="playLogo">
+                <div id="audioTimer"></div>
+                <input type="range" id="audioProgress" min="0" max="1" step="0.1" value="0">
+                <input type="range" id="volume" min="0" max="1" setp="0.1" value="1">
+            </div>
+        </div>
+        <audio loop src="" type="audio/mpeg" id="loginAudio"></audio>
         <div class="players">
             <form>
                 <label for="">Player One</label>
                 <input type="text" placeholder="Enter name" id="playerInputOne" autofocus>
-                <label for="">
+                <label for="" id="customUploadButtonOne">
                     <img src="" alt="Image preview" id="previewImageOne">
                     <p>Profile image (optional)</p>
                 </label>
@@ -26,7 +35,7 @@
             <form>
                 <label for="">Player Two</label>
                 <input type="text" placeholder="Enter name" id="playerInputTwo">
-                <label for="">
+                <label for="" id="customUploadButtonTwo">
                     <img src="" alt="Image preview" id="previewImageTwo">
                     <p>Profile image (optional)</p>
                 </label>
