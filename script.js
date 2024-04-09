@@ -36,7 +36,7 @@ function GameController(playersData) {
     }
     const winner = checkWinner();
     if (winner) {
-      return winner;
+      printNewTurn(winner);
     } else {
       switchTurn();
       printNewTurn();
@@ -44,9 +44,21 @@ function GameController(playersData) {
   };
 
   const checkWinner = () => {};
-  const printNewTurn = () => {};
+  const printNewTurn = (winner) => {
+    if (winner) {
+      board.resetBoard();
+    } else {
+      board.printBoard();
+    }
+  };
 
-  return { switchTurn, getActivePlayer, getScore, playTurn };
+  printNewTurn();
+
+  return {
+    playTurn,
+    getScore,
+    board: board.getBoardCells(),
+  };
 }
 
 function ScreenController() {
