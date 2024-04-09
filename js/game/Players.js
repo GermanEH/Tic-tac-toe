@@ -9,13 +9,13 @@ function Player() {
 
   const setName = (value) => (player.name = value);
 
-  const getMark = () => player.points;
+  const getMark = () => player.mark;
 
-  const setMark = (value) => (player.points = value);
+  const setMark = (value) => (player.mark = value);
 
-  const getPoints = () => player.mark;
+  const getPoints = () => player.points;
 
-  const setPoints = (value) => (player.mark = value);
+  const setPoints = (value) => (player.points = value);
 
   return { getName, setName, getMark, setMark, getPoints, setPoints };
 }

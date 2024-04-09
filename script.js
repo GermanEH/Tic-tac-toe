@@ -1,6 +1,14 @@
 import Board from './js/game/Board';
+import Player from './js/game/Players';
 
 function GameController(players) {
+  const player = Player();
+
+  for (let i = 0; i < players.length; i++) {
+    player.setName(players[i].name);
+    player.setMark(players[i].mark);
+  }
+
   const board = Board();
   const score = [];
 
