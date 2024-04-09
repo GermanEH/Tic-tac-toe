@@ -14,21 +14,27 @@
         <audio src=""></audio>
         <div class="players">
             <form>
-                <label for=""></label>
-                <input type="text">
-                <label for=""></label>
-                <input type="file">
+                <label for="">Player One</label>
+                <input type="text" placeholder="Enter name" id="playerInputOne" autofocus>
+                <label for="">
+                    <img src="" alt="Image preview" id="previewImageOne">
+                    <p>Profile image (optional)</p>
+                </label>
+                <input type="file" id="fileInputOne">
             </form>
-            <button></button>
+            <button type="submit" disabled>Play Tic-tac-to</button>
             <form>
-                <label for=""></label>
-                <input type="text">
-                <label for=""></label>
-                <input type="file">
+                <label for="">Player Two</label>
+                <input type="text" placeholder="Enter name" id="playerInputTwo">
+                <label for="">
+                    <img src="" alt="Image preview" id="previewImageTwo">
+                    <p>Profile image (optional)</p>
+                </label>
+                <input type="file" id="fileInputTwo">
             </form>
         </div>
     </div>
     <div id="gameContainer"></div>
     <script type="module" src="script.js"></script>
 </body>
-</html>l
+</html>
