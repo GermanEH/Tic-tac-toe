@@ -4,7 +4,7 @@ function Cell() {
 
   const getValue = () => value;
 
-  const mark = (mark) => (value = mark);
+  const mark = (mark) => (value = mark.value) && (content = mark.cellContent);
 
   const resetCell = () => {
     value = '';
