@@ -38,6 +38,7 @@ function GameController(playersData) {
 
     if (winnerData) {
       printNewTurn(winnerData);
+      return winnerData;
     } else {
       switchTurn();
       printNewTurn();
@@ -80,11 +81,11 @@ function GameController(playersData) {
     }
   };
 
-  printNewTurn();
-
   return {
     playTurn,
     getScore,
     board: board.getBoardCells(),
   };
 }
+
+export default GameController;
