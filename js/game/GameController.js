@@ -70,8 +70,11 @@ function GameController(playersData) {
 
   const printNewTurn = (winnerData) => {
     if (winnerData) {
-      board.resetBoard();
-      return winnerData;
+      board.printWinner(winnerData.winnerCombination);
+      board.printBoard();
+      setTimeout(() => {
+        board.resetBoard();
+      }, 1000);
     } else {
       board.printBoard();
     }

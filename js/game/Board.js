@@ -39,5 +39,14 @@ export default function Board() {
     });
   };
 
-  return { getBoardCells, markCell, printBoard, resetBoard };
+  const printWinner = (winnerCells) => {
+    boardWithCellValues = board.map((cell, i) => {
+      if (winnerCells.includes(i)) {
+        cell.setWinner();
+        console.log(cell.getContent());
+      }
+    });
+  };
+
+  return { getBoardCells, markCell, printBoard, resetBoard, printWinner };
 }
