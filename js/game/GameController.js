@@ -28,25 +28,50 @@ function GameController(playersData) {
     }
   };
 
-  const playTurn = (cell) => {
-    if (!cell.row || !cell.column) {
+  const playTurn = (selectedCell) => {
+    if (!selectedCell) {
       return;
     } else {
-      board.markCell(cell);
+      board.markCell(selectedCell, getActivePlayer().mark);
     }
-    const winner = checkWinner();
-    if (winner) {
-      printNewTurn(winner);
+    const winnerData = checkWinner();
+
+    if (winnerData) {
+      printNewTurn(winnerData);
     } else {
       switchTurn();
       printNewTurn();
     }
   };
 
-  const checkWinner = () => {};
-  const printNewTurn = (winner) => {
-    if (winner) {
+  const checkWinner = () => {
+    const winnerCombinations = [
+      [0, 1, 2],
+      [0, 3, 6],
+      [3, 4, 5],
+      [1, 4, 7],
+      [6, 7, 8],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    for (const winnerCombination of winnerCombinations) {
+      const [a, b, c] = winnerCombination;
+      if (
+        boardCells[a].getValue() !== '' &&
+        boardCells[a].getValue() === boardCells[b].getValue() &&
+        boardCells[b].getValue() === boardCells[c].getValue()
+      ) {
+        return { activePlayer, winnerCombination };
+      }
+    }
+  };
+
+  const printNewTurn = (winnerData) => {
+    if (winnerData) {
       board.resetBoard();
+      return winnerData;
     } else {
       board.printBoard();
     }
