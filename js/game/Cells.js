@@ -1,11 +1,15 @@
 function Cell() {
-  const value = 0;
+  const value = '';
+  const content = '';
 
   const getValue = () => value;
 
   const mark = (mark) => (value = mark);
 
-  const resetValue = () => (value = 0);
+  const resetCell = () => {
+    value = '';
+    content = '';
+  };
 
-  return { getValue, mark, resetValue };
+  return { getValue, mark, resetCell };
 }
