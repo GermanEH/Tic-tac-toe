@@ -4,6 +4,8 @@ function Cell() {
 
   const getValue = () => value;
 
+  const getContent = () => content;
+
   const mark = (mark) => (value = mark.value) && (content = mark.cellContent);
 
   const resetCell = () => {
@@ -11,5 +13,5 @@ function Cell() {
     content = '';
   };
 
-  return { getValue, mark, resetCell };
+  return { getValue, getContent, mark, resetCell };
 }
