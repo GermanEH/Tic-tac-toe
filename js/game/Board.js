@@ -13,7 +13,7 @@ export default function Board() {
     const cell = board[selectedCell];
     const value = cell.getValue();
 
-    if (value !== 0) {
+    if (value !== '') {
       return;
     } else {
       cell.mark(mark);
@@ -23,9 +23,7 @@ export default function Board() {
   let boardWithCellValues = [];
 
   const printBoard = () => {
-    boardWithCellValues = board.map((row) => {
-      row.map((cell) => cell.getValue());
-    });
+    boardWithCellValues = board.map((cell) => cell.getValue());
   };
 
   const resetBoard = () => {
