@@ -26,6 +26,7 @@ function GameController(playersData) {
 
   const resetScore = () =>
     (players = players.map((player) => ({ ...player, player: 0 })));
+
   const playTurn = (selectedCell) => {
     if (!selectedCell) {
       return;
@@ -42,6 +43,8 @@ function GameController(playersData) {
       printNewTurn();
     }
   };
+
+  printNewTurn();
 
   const checkWinner = () => {
     const winnerCombinations = [
@@ -69,8 +72,6 @@ function GameController(playersData) {
 
   const printNewTurn = (winnerData) => {
     if (winnerData) {
-      board.printWinner(winnerData.winnerCombination);
-      board.printBoard();
       setTimeout(() => {
         board.resetBoard();
       }, 1000);
@@ -82,6 +83,7 @@ function GameController(playersData) {
   return {
     playTurn,
     getScore,
+    resetScore,
     board: board.getBoardCells(),
   };
 }
