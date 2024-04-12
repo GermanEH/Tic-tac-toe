@@ -14,7 +14,6 @@ function GameController(playersData) {
   const boardCells = board.getBoardCells();
 
   const activePlayer = players[0];
-  const score = [];
 
   const switchTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
@@ -22,11 +21,11 @@ function GameController(playersData) {
 
   const getActivePlayer = () => activePlayer;
 
-  const getScore = () => {
-    for (let i = 0; i < players.length; i++) {
-      score.push(players[i].getScore());
-    }
-  };
+  const getScore = (player) =>
+    players.find((p) => p.getName() === player).getPoints();
+
+  const resetScore = () =>
+    (players = players.map((player) => ({ ...player, player: 0 })));
 
   const playTurn = (selectedCell) => {
     if (!selectedCell) {
@@ -44,6 +43,8 @@ function GameController(playersData) {
       printNewTurn();
     }
   };
+
+  printNewTurn();
 
   const checkWinner = () => {
     const winnerCombinations = [
@@ -71,8 +72,6 @@ function GameController(playersData) {
 
   const printNewTurn = (winnerData) => {
     if (winnerData) {
-      board.printWinner(winnerData.winnerCombination);
-      board.printBoard();
       setTimeout(() => {
         board.resetBoard();
       }, 1000);
@@ -84,6 +83,7 @@ function GameController(playersData) {
   return {
     playTurn,
     getScore,
+    resetScore,
     board: board.getBoardCells(),
   };
 }
