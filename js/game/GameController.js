@@ -24,6 +24,8 @@ function GameController(playersData) {
   const getScore = (player) =>
     players.find((p) => p.getName() === player).getPoints();
 
+  const resetScore = () =>
+    (players = players.map((player) => ({ ...player, player: 0 })));
   const playTurn = (selectedCell) => {
     if (!selectedCell) {
       return;
