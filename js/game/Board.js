@@ -34,9 +34,7 @@ export default function Board() {
   };
 
   const resetBoard = () => {
-    boardWithCellValues = board.map((row) => {
-      row.map((cell) => cell.resetValue());
-    });
+    boardWithCellValues = board.map((cell) => cell.resetValue());
   };
 
   const printWinner = (winnerCells) => {
