@@ -14,7 +14,6 @@ function GameController(playersData) {
   const boardCells = board.getBoardCells();
 
   const activePlayer = players[0];
-  const score = [];
 
   const switchTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
@@ -22,11 +21,8 @@ function GameController(playersData) {
 
   const getActivePlayer = () => activePlayer;
 
-  const getScore = () => {
-    for (let i = 0; i < players.length; i++) {
-      score.push(players[i].getScore());
-    }
-  };
+  const getScore = (player) =>
+    players.find((p) => p.getName() === player).getPoints();
 
   const playTurn = (selectedCell) => {
     if (!selectedCell) {
