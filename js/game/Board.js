@@ -1,11 +1,9 @@
 import Cell from './Cells';
 
 export default function Board() {
-  const rows = 3;
-  const columns = 3;
   const board = [];
 
-  for (let i = 0; i < rows; i++) {
+  for (let i = 0; i < 9; i++) {
     board[i] = [];
     for (let j = 0; j < columns; j++) {
       board.push(Cell());
@@ -41,7 +39,6 @@ export default function Board() {
     boardWithCellValues = board.map((cell, i) => {
       if (winnerCells.includes(i)) {
         cell.setWinner();
-        console.log(cell.getContent());
       }
     });
   };
