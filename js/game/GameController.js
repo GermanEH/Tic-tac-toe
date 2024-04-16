@@ -23,7 +23,7 @@ function GameController(playersData, theme) {
     players.find((p) => p.getName() === player).getPoints();
 
   const resetScore = () =>
-    (players = players.map((player) => ({ ...player, player: 0 })));
+    (players = players.map((player) => ({ ...player, points: 0 })));
 
   const playTurn = (selectedCell) => {
     if (!selectedCell) {
@@ -40,6 +40,18 @@ function GameController(playersData, theme) {
       switchTurn();
       printNewTurn();
     }
+  };
+
+  const changeWeapon = (player, src) => {
+    players.map((p) => {
+      if (p.name === player) {
+        p.mark.cellContent = p.mark.cellContent.replace(
+          /src="([^"]*)"/,
+          'src="' + src + '"'
+        );
+      }
+      return p;
+    });
   };
 
   printNewTurn();
@@ -82,6 +94,7 @@ function GameController(playersData, theme) {
     playTurn,
     getScore,
     resetScore,
+    changeWeapon,
     board: board.getBoardCells(),
   };
 }
