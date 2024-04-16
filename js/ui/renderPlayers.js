@@ -1,7 +1,7 @@
 import colors from './colors.js';
 import weapons from './weapons.js';
 
-function renderPlayers(players, theme) {
+export default function renderPlayers(players, theme) {
   let $playerOne = document.querySelector('.playerOne');
   let $playerOnePicture = document.createElement('div');
   $playerOnePicture.style.background =
@@ -56,61 +56,77 @@ function renderPlayers(players, theme) {
 
   $playerOne.appendChild($playerOnePicture);
   $playerOne.appendChild($playerOneBoard);
-  if (players.length > 1) {
-    let $playerTwo = document.querySelector('.playerTwo');
-    let $playerTwoPicture = document.createElement('div');
-    $playerTwoPicture.style.background =
-      theme === 'Medieval'
-        ? 'url(./ui/frames/medieval_frame.png)'
-        : theme === 'Futuristic'
-        ? 'url(./ui/frames/futuristic_frame.png)'
-        : 'url(./ui/frames/vintage_frame.png)';
-    $playerTwoPicture.style.backgroundSize = 'contain';
-    $playerTwoPicture.style.backgroundRepeat = 'no-repeat';
-    $playerTwoPicture.classList.add('playerPicture');
-    let $playerTwoBoard = document.createElement('div');
-    $playerTwoBoard.style.background =
-      theme === 'Medieval'
-        ? 'url(./medieval_board.png)'
-        : theme === 'Futuristic'
-        ? 'url(./futuristic_panel.jpg)'
-        : 'url(./vintage_board.png)';
-    $playerTwoBoard.style.backgroundRepeat = 'no-repeat';
-    $playerTwoBoard.style.backgroundSize = 'contain';
-    $playerTwoBoard.classList.add('playerBoard');
-    const playerTwo = document.createElement('div');
-    playerTwo.textContent = players[1].name;
-    $playerTwoBoard.appendChild(playerTwo);
+  let $playerTwo = document.querySelector('.playerTwo');
+  let $playerTwoPicture = document.createElement('div');
+  $playerTwoPicture.style.background =
+    theme === 'Medieval'
+      ? 'url(./ui/frames/medieval_frame.png)'
+      : theme === 'Futuristic'
+      ? 'url(./ui/frames/futuristic_frame.png)'
+      : 'url(./ui/frames/vintage_frame.png)';
+  $playerTwoPicture.style.backgroundSize = 'contain';
+  $playerTwoPicture.style.backgroundRepeat = 'no-repeat';
+  $playerTwoPicture.classList.add('playerPicture');
+  let $playerTwoBoard = document.createElement('div');
+  $playerTwoBoard.style.background =
+    theme === 'Medieval'
+      ? 'url(./medieval_board.png)'
+      : theme === 'Futuristic'
+      ? 'url(./futuristic_panel.jpg)'
+      : 'url(./vintage_board.png)';
+  $playerTwoBoard.style.backgroundRepeat = 'no-repeat';
+  $playerTwoBoard.style.backgroundSize = 'contain';
+  $playerTwoBoard.classList.add('playerBoard');
+  const playerTwo = document.createElement('div');
+  playerTwo.textContent = players[1].name;
+  $playerTwoBoard.appendChild(playerTwo);
 
-    let $playerTwoBoardSelect = document.createElement('select');
-    weapons.forEach((weapon) => {
-      const $weapon = document.createElement('option');
-      $weapon.value = weapon.value;
-      $weapon.text = weapon.value;
-      $playerTwoBoardSelect.appendChild($weapon);
-    });
+  let $playerTwoBoardSelect = document.createElement('select');
+  weapons.forEach((weapon) => {
+    const $weapon = document.createElement('option');
+    $weapon.value = weapon.value;
+    $weapon.text = weapon.value;
+    $playerTwoBoardSelect.appendChild($weapon);
+  });
 
-    $playerTwoBoardSelect.addEventListener('change', function () {
-      game.changeWeapon(players[1].name, weapons[this.selectedIndex].src);
-    });
+  $playerTwoBoardSelect.addEventListener('change', function () {
+    game.changeWeapon(players[1].name, weapons[this.selectedIndex].src);
+  });
 
-    const $playerTwoBoardColor = document.createElement('select');
+  const $playerTwoBoardColor = document.createElement('select');
 
-    colors.forEach((color) => {
-      const $color = document.createElement('option');
-      $color.value = color;
-      $color.text = color;
-      $playerTwoBoardColor.appendChild($color);
-    });
+  colors.forEach((color) => {
+    const $color = document.createElement('option');
+    $color.value = color;
+    $color.text = color;
+    $playerTwoBoardColor.appendChild($color);
+  });
 
-    $playerTwoBoard.appendChild($playerTwoBoardColor);
-    $playerTwoBoard.appendChild($playerTwoBoardSelect);
+  $playerTwoBoard.appendChild($playerTwoBoardColor);
+  $playerTwoBoard.appendChild($playerTwoBoardSelect);
 
-    $playerTwoBoardColor.addEventListener('change', function () {
-      game.changeColor(players[1].name, colors[this.selectedIndex]);
-    });
+  $playerTwoBoardColor.addEventListener('change', function () {
+    game.changeColor(players[1].name, colors[this.selectedIndex]);
+  });
 
-    $playerTwo.appendChild($playerTwoPicture);
-    $playerTwo.appendChild($playerTwoBoard);
-  }
+  $playerTwo.appendChild($playerTwoPicture);
+  $playerTwo.appendChild($playerTwoBoard);
+
+  let $playerOneScore = document.createElement('div');
+  let $playerTwoScore = document.createElement('div');
+
+  const renderScore = (players) => {
+    $playerOneScore.textContent = `Games won: ${game.getScore(
+      players[0].name
+    )}`;
+    $playerOneBoard.appendChild($playerOneScore);
+    if (players.length > 1) {
+      $playerTwoScore.textContent = `Games won: ${game.getScore(
+        players[1].name
+      )}`;
+      $playerTwoBoard.appendChild($playerTwoScore);
+    }
+  };
+
+  return { renderScore };
 }
