@@ -1,12 +1,10 @@
 import Board from './Board';
 import Player from './Players';
 
-function GameController(playersData) {
+function GameController(playersData, theme) {
   const players = [];
   for (let i = 0; i < playersData.length; i++) {
-    players.push(Player());
-    players[i].setName(playersData[i].name);
-    players[i].setMark(playersData[i].mark);
+    players.push(Player(playersData[i], theme));
   }
 
   const board = Board();
