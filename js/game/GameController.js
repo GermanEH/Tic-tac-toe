@@ -54,6 +54,20 @@ function GameController(playersData, theme) {
     });
   };
 
+  const changeColor = (player, color) => {
+    const oppositeColor = players.filter((p) => p.name !== player)[0].mark
+      .cellContent;
+    players.map((p) => {
+      if (p.name === player && !oppositeColor.includes(color)) {
+        p.mark.cellContent = p.mark.cellContent.replace(
+          /background:\s*([^;]+)/,
+          'background:' + color
+        );
+      }
+      return p;
+    });
+  };
+
   printNewTurn();
 
   const checkWinner = () => {
@@ -95,6 +109,7 @@ function GameController(playersData, theme) {
     getScore,
     resetScore,
     changeWeapon,
+    changeColor,
     board: board.getBoardCells(),
   };
 }
