@@ -10,5 +10,5 @@ export default function GameScreen(players, theme) {
 
   const board = GameBoard();
 
-  const game = GameController(players[0].name, players[1].name, theme, board);
+  const game = GameController(players, theme, board);
 }

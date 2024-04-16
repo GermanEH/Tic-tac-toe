@@ -1,15 +1,17 @@
 function Player(playerData, theme) {
+  const { name, profileImage, value } = playerData;
+
   const player = {
-    name: playerData.name,
-    profileImage: playerData.profileImage,
+    name,
+    profileImage,
     mark: {
-      value: playerData.value,
+      value,
       cellContent:
         theme === 'Medieval'
-          ? `<img src="./ui/weapons/sword.png" alt="${playerData.value}" style="width:60px;background:blue;height:60px">`
+          ? `<img src="./ui/weapons/sword.png" alt="${value}" style="width:60px;background:blue;height:60px">`
           : theme === 'Futuristic'
-          ? `<img src="./ui/weapons/spacecraft.png" alt="${playerData.value}" style="width:60px;background:blue;height:60px">`
-          : `<img src="./ui/weapons/gun.png" alt="${playerData.value}" style="width:60px;background:blue;height:60px">`,
+          ? `<img src="./ui/weapons/spacecraft.png" alt="${value}" style="width:60px;background:blue;height:60px">`
+          : `<img src="./ui/weapons/gun.png" alt="${value}" style="width:60px;background:blue;height:60px">`,
     },
     points: 0,
   };
