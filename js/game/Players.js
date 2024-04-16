@@ -1,13 +1,22 @@
-function Player() {
+function Player(playerData, theme) {
+  const { name, profileImage, value } = playerData;
+
   const player = {
-    name: '',
-    mark: '',
+    name,
+    profileImage,
+    mark: {
+      value,
+      cellContent:
+        theme === 'Medieval'
+          ? `<img src="./ui/weapons/sword.png" alt="${value}" style="width:60px;background:blue;height:60px">`
+          : theme === 'Futuristic'
+          ? `<img src="./ui/weapons/spacecraft.png" alt="${value}" style="width:60px;background:blue;height:60px">`
+          : `<img src="./ui/weapons/gun.png" alt="${value}" style="width:60px;background:blue;height:60px">`,
+    },
     points: 0,
   };
 
   const getName = () => player.name;
-
-  const setName = (value) => (player.name = value);
 
   const getMark = () => player.mark;
 
@@ -17,5 +26,5 @@ function Player() {
 
   const setPoints = (value) => (player.points = value);
 
-  return { getName, setName, getMark, setMark, getPoints, setPoints };
+  return { getName, getMark, setMark, getPoints, setPoints };
 }

@@ -1,12 +1,10 @@
 import Board from './Board';
 import Player from './Players';
 
-function GameController(playersData) {
+function GameController(playersData, theme) {
   const players = [];
   for (let i = 0; i < playersData.length; i++) {
-    players.push(Player());
-    players[i].setName(playersData[i].name);
-    players[i].setMark(playersData[i].mark);
+    players.push(Player(playersData[i], theme));
   }
 
   const board = Board();
@@ -25,7 +23,7 @@ function GameController(playersData) {
     players.find((p) => p.getName() === player).getPoints();
 
   const resetScore = () =>
-    (players = players.map((player) => ({ ...player, player: 0 })));
+    (players = players.map((player) => ({ ...player, points: 0 })));
 
   const playTurn = (selectedCell) => {
     if (!selectedCell) {
@@ -42,6 +40,32 @@ function GameController(playersData) {
       switchTurn();
       printNewTurn();
     }
+  };
+
+  const changeWeapon = (player, src) => {
+    players.map((p) => {
+      if (p.name === player) {
+        p.mark.cellContent = p.mark.cellContent.replace(
+          /src="([^"]*)"/,
+          'src="' + src + '"'
+        );
+      }
+      return p;
+    });
+  };
+
+  const changeColor = (player, color) => {
+    const oppositeColor = players.filter((p) => p.name !== player)[0].mark
+      .cellContent;
+    players.map((p) => {
+      if (p.name === player && !oppositeColor.includes(color)) {
+        p.mark.cellContent = p.mark.cellContent.replace(
+          /background:\s*([^;]+)/,
+          'background:' + color
+        );
+      }
+      return p;
+    });
   };
 
   printNewTurn();
@@ -84,6 +108,8 @@ function GameController(playersData) {
     playTurn,
     getScore,
     resetScore,
+    changeWeapon,
+    changeColor,
     board: board.getBoardCells(),
   };
 }
