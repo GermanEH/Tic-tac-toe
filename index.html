@@ -22,25 +22,16 @@
         </div>
         <audio loop src="" type="audio/mpeg" id="loginAudio"></audio>
         <div class="players">
-            <form>
-                <label for="">Player One</label>
-                <input type="text" placeholder="Enter name" id="playerInputOne" autofocus>
-                <label for="" id="customUploadButtonOne">
-                    <img src="" alt="Image preview" id="previewImageOne">
-                    <p>Profile image (optional)</p>
+            <form id="player" oninput="checkFormValidity()">
+                <label class="player_title">Player One</label>
+                <input type="text" placeholder="Enter name" class="playerInput" autofocus>
+                <label class="custom-upload-button">
+                    <img class="previewImage">
+                    <p class="previewText">Profile image (optional)</p>
                 </label>
-                <input type="file" id="fileInputOne">
-            </form>
-            <button type="submit" disabled>Play Tic-tac-to</button>
-            <form>
-                <label for="">Player Two</label>
-                <input type="text" placeholder="Enter name" id="playerInputTwo">
-                <label for="" id="customUploadButtonTwo">
-                    <img src="" alt="Image preview" id="previewImageTwo">
-                    <p>Profile image (optional)</p>
-                </label>
-                <input type="file" id="fileInputTwo">
-            </form>
+                <input type="file" class="fileInput">
+        </form>
+        <button id="playButton" type="submit" disabled>Play Tic Tac Toe</button>
         </div>
     </div>
     <div class="themeContainer" style="display:none">
