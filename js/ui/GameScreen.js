@@ -39,4 +39,10 @@ export default function GameScreen(players, theme) {
     board.resetBoard();
     updateScreen();
   });
+
+  let resetScore = document.getElementById('resetButton');
+  resetScore.addEventListener('click', () => {
+    game.resetScore();
+    updateScreen();
+  });
 }
