@@ -56,4 +56,42 @@ export default function GameScreen(players, theme) {
     $playerOneBoard.appendChild($playerOneScore);
     $playerTwoBoard.appendChild($playerTwoScore);
   };
+
+  const updateScreen = (winner) => {
+    const boardCells = board.getBoard();
+    const activePlayer = game.getActivePlayer();
+    renderScore(players);
+
+    if (winner) {
+      boardCells.forEach((cell, cellIndex) => {
+        if (winner.winnerCombination.includes(cellIndex)) {
+          const content = cell.getContent();
+          const cellButton = document.querySelector(
+            `[data-cell-index="${cellIndex}"]`
+          );
+          cellButton.innerHTML = content;
+          cellButton.classList.toggle('winner', true);
+          $board.appendChild(cellButton);
+        } else {
+          const cellButton = document.querySelector(
+            `[data-cell-index="${cellIndex}"]`
+          );
+          const content = cell.getContent();
+          cellButton.innerHTML = content;
+          $board.appendChild(cellButton);
+        }
+      });
+    } else {
+      $board.textContent = '';
+      boardCells.forEach((cell, cellIndex) => {
+        const content = cell.getContent();
+        const cellButton = document.createElement('button');
+        cellButton.dataset.cellIndex = cellIndex;
+        cellButton.classList.add('cell');
+        cellButton.innerHTML = content;
+        $board.appendChild(cellButton);
+      });
+      $turn.textContent = `It's ${activePlayer.name}'s turn`;
+    }
+  };
 }
