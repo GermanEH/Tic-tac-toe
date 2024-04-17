@@ -9,7 +9,31 @@
 <body>
     <button>Play Tic-tac-toe</button>
     <div id="bgAnimation"></div>
-    <div class="optionsContainer"></div>
+    <div class="playerModeContainer">
+        <div class="music-container">
+            <img src="./audio_active.png" alt="" id="volume-logo">
+            
+            <div class="custom-controls">
+                <img src="./audio_pause.png" alt="" id="play-logo">
+                <div id="audio-timer"></div>
+                <input type="range"  id="audio-progress" min="0" max="1" step="0.1" value="0">
+                <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+        <audio loop src="./RetroFuture-Clean.mp3" type="audio/mpeg" id="loginAudio">
+        </audio>
+        
+        <div class="playerModeBody">
+            <div class="singleplayer">
+                <h1>Singleplayer</h1>
+                <img src="./ui/singleplayer.png" style="height:8vw; width: 5vw;"></img>
+            </div>
+            <div class="multiplayer">
+                <h1>Multiplayer</h1>
+                <img src="./ui/multiplayer.png" style="height:8vw; width: 9.5vw;"></img>
+            </div>
+        </div>
+    </div>
     <div id="loginContainer">
         <div class="musicContainer">
             <img src="" alt="" id="volumeLogo">
