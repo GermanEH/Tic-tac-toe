@@ -1,7 +1,11 @@
 import colors from './colors.js';
-import weapons from './weapons.js';
+import setWeapons from './weapons.js';
 
 export default function renderPlayers(players, theme) {
+  const weapons = setWeapons(theme);
+
+  //Player One
+
   let $playerOne = document.querySelector('.playerOne');
   let $playerOnePicture = document.createElement('div');
   $playerOnePicture.style.background =
@@ -25,6 +29,7 @@ export default function renderPlayers(players, theme) {
   $playerOneBoard.style.backgroundSize = 'contain';
   $playerOneBoard.classList.add('playerBoard');
   let $playerOneBoardSelect = document.createElement('select');
+
   const playerOne = document.createElement('div');
   playerOne.textContent = players[0].name;
   $playerOneBoard.appendChild(playerOne);
@@ -56,6 +61,9 @@ export default function renderPlayers(players, theme) {
 
   $playerOne.appendChild($playerOnePicture);
   $playerOne.appendChild($playerOneBoard);
+
+  //PlayerTwo
+
   let $playerTwo = document.querySelector('.playerTwo');
   let $playerTwoPicture = document.createElement('div');
   $playerTwoPicture.style.background =
@@ -67,6 +75,11 @@ export default function renderPlayers(players, theme) {
   $playerTwoPicture.style.backgroundSize = 'contain';
   $playerTwoPicture.style.backgroundRepeat = 'no-repeat';
   $playerTwoPicture.classList.add('playerPicture');
+  //  theme === 'Medieval';
+  // ? 'url(medieval_board.png)'
+  // : theme === 'Futuristic'
+  // ? 'url(futuristic_panel.jpg)'
+  // :
   let $playerTwoBoard = document.createElement('div');
   $playerTwoBoard.style.background =
     theme === 'Medieval'
@@ -78,7 +91,7 @@ export default function renderPlayers(players, theme) {
   $playerTwoBoard.style.backgroundSize = 'contain';
   $playerTwoBoard.classList.add('playerBoard');
   const playerTwo = document.createElement('div');
-  playerTwo.textContent = players[1].name;
+  playerTwo.textContent = players[1]?.name || 'Player Two';
   $playerTwoBoard.appendChild(playerTwo);
 
   let $playerTwoBoardSelect = document.createElement('select');
@@ -90,7 +103,10 @@ export default function renderPlayers(players, theme) {
   });
 
   $playerTwoBoardSelect.addEventListener('change', function () {
-    game.changeWeapon(players[1].name, weapons[this.selectedIndex].src);
+    game.changeWeapon(
+      players[1]?.name || 'Player Two',
+      weapons[this.selectedIndex].src
+    );
   });
 
   const $playerTwoBoardColor = document.createElement('select');
@@ -106,27 +122,29 @@ export default function renderPlayers(players, theme) {
   $playerTwoBoard.appendChild($playerTwoBoardSelect);
 
   $playerTwoBoardColor.addEventListener('change', function () {
-    game.changeColor(players[1].name, colors[this.selectedIndex]);
+    game.changeColor(
+      players[1].name || 'Player Two',
+      colors[this.selectedIndex]
+    );
   });
 
   $playerTwo.appendChild($playerTwoPicture);
   $playerTwo.appendChild($playerTwoBoard);
+  // $playerTwo.style.transform = 'scaleY(1.5)';
+  if (players[0].profileImage) {
+    let $profileImageOne = document.createElement('img');
+    $profileImageOne.src = players[0].profileImage?.name;
+    $profileImageOne.style.width = '8vw';
+    $profileImageOne.style.height = '8vw';
+    $playerOne.appendChild($profileImageOne);
+  }
+  if (players[1]?.profileImage) {
+    let $profileImageTwo = document.createElement('img');
+    $profileImageTwo.src = players[1].profileImage.name;
+    $profileImageTwo.style.width = '8vw';
+    $profileImageTwo.style.height = '8vw';
+    $playerTwo.appendChild($profileImageTwo);
+  }
 
-  let $playerOneScore = document.createElement('div');
-  let $playerTwoScore = document.createElement('div');
-
-  const renderScore = (players) => {
-    $playerOneScore.textContent = `Games won: ${game.getScore(
-      players[0].name
-    )}`;
-    $playerOneBoard.appendChild($playerOneScore);
-    if (players.length > 1) {
-      $playerTwoScore.textContent = `Games won: ${game.getScore(
-        players[1].name
-      )}`;
-      $playerTwoBoard.appendChild($playerTwoScore);
-    }
-  };
-
-  return { renderScore };
+  return { $playerOne, $playerTwo, $playerOneBoard, $playerTwoBoard };
 }

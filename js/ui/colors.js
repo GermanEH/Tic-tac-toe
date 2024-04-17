@@ -1,1 +1,3 @@
-export default colors = ['red', 'blue', 'orange', 'yellow', 'brown', 'black'];
+const colors = ['red', 'blue', 'orange', 'yellow', 'brown', 'black'];
+
+export default colors;

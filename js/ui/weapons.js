@@ -1,6 +1,8 @@
-export default weapons =
+export default function Weapons(theme) {
+  let weapons = [];
+
   theme === 'Medieval'
-    ? [
+    ? (weapons = [
         {
           value: 'sword',
           src: './ui/weapons/sword.png',
@@ -13,9 +15,9 @@ export default weapons =
           value: 'bow',
           src: './ui/weapons/bow.png',
         },
-      ]
+      ])
     : theme === 'Futuristic'
-    ? [
+    ? (weapons = [
         {
           value: 'spacecraft',
           src: './ui/weapons/spacecraft.png',
@@ -28,8 +30,8 @@ export default weapons =
           value: 'sci-fi sword',
           src: './ui/weapons/sci-fi_sword.png',
         },
-      ]
-    : [
+      ])
+    : (weapons = [
         {
           value: 'gun',
           src: './ui/weapons/gun.png',
@@ -42,4 +44,7 @@ export default weapons =
           value: 'british saber',
           src: './ui/weapons/british_saber.png',
         },
-      ];
+      ]);
+
+  return weapons;
+}

@@ -9,15 +9,16 @@ export default function GameScreen(players, theme) {
   );
 
   const board = GameBoard();
-
   const game = GameController(players, theme, board);
+  const { $playerOne, $playerTwo, $playerOneBoard, $playerTwoBoard } =
+    renderPlayers(players, theme);
 
-  renderPlayers(players, theme);
+  let $turn = document.querySelector('.turn');
+  let $board = document.querySelector('.board');
+  let $playerOneScore = document.createElement('div');
+  let $playerTwoScore = document.createElement('div');
 
   let $audio = document.getElementById('loginAudio');
-  // let $playerBoard = document.createElement('img');
-  // $playerBoard.src = './medieval_board_cut.jpg';
-  // $gameContainer.appendChild($playerBoard);
   $audio.src =
     theme === 'Medieval'
       ? 'medieval_background.mp3'
@@ -51,7 +52,7 @@ export default function GameScreen(players, theme) {
       players[0].name
     )}`;
     $playerTwoScore.textContent = `Games won: ${game.getScore(
-      players[1].name
+      players[1].name || 'Player Two'
     )}`;
     $playerOneBoard.appendChild($playerOneScore);
     $playerTwoBoard.appendChild($playerTwoScore);
@@ -93,5 +94,34 @@ export default function GameScreen(players, theme) {
       });
       $turn.textContent = `It's ${activePlayer.name}'s turn`;
     }
+  };
+  const clickHandlerBoard = (e) => {
+    const selectedCell = e.target.dataset.cellIndex;
+    const cells = document.querySelectorAll('button');
+    const winner = game.playTurn(selectedCell);
+    $audio.pause();
+
+    $attackSound.play();
+
+    $audio.play();
+    if (winner) {
+      const cells = document.querySelectorAll('button');
+      updateScreen(winner);
+
+      setTimeout(() => {
+        updateScreen();
+      }, 2000);
+    } else {
+      updateScreen();
+    }
+  };
+  $board.addEventListener('click', clickHandlerBoard);
+  return {
+    $gameContainer,
+    $playerOne,
+    $playerTwo,
+    updateScreen,
+    clickHandlerBoard,
+    renderScore,
   };
 }
