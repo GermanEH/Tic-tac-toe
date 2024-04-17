@@ -1,0 +1,61 @@
+body {
+    margin:0;
+    padding:0;
+    border:0;
+    width:100vw;
+    height:100vh;
+}
+
+#loginAudio, #themeContainer, #gameContainer {
+    display:none
+}
+
+
+.bgAnimation {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    display:grid;
+    grid-template-columns: repeat(20,1fr);
+    grid-template-rows: repeat(20,1fr);
+    background: #1d1d1d;
+    filter: saturate(2);
+    overflow:hidden;
+    z-index:1
+}
+
+.colorBox {
+    filter: brightness(1.1);
+    transition: 2s ease;
+    position: relative;
+    margin: 2px;
+    background: #1d1d1d
+}
+
+.colorBox:hover {
+    background-color: var(--primary-color);
+    transition-duration:0s;
+}
+
+.backgroundAnim {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:60px;
+    background-color: var(--primary-color);
+    filter:blur(60px);
+    animation: animBak linear 6s infinite
+}
+
+@keyframes animBak {
+    0% {
+        top:-60px
+    }
+
+    100% {
+        top:120%
+    }
+}
