@@ -33,4 +33,10 @@ export default function GameScreen(players, theme) {
       : theme === 'Futuristic'
       ? 'spacecraft_attack.mp3'
       : 'gun_attack.mp3';
+
+  const restartBoard = document.getElementById('restartButton');
+  restartBoard.addEventListener('click', () => {
+    board.resetBoard();
+    updateScreen();
+  });
 }
