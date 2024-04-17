@@ -116,4 +116,12 @@ export default function GameScreen(players, theme) {
     }
   };
   $board.addEventListener('click', clickHandlerBoard);
+  return {
+    $gameContainer,
+    $playerOne,
+    $playerTwo,
+    updateScreen,
+    clickHandlerBoard,
+    renderScore,
+  };
 }
