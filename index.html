@@ -8,8 +8,34 @@
 </head>
 <body>
     <button>Play Tic-tac-toe</button>
-    <div id="bgAnimation"></div>
-    <div class="optionsContainer"></div>
+    <div class="bgAnimation" id="bgAnimation">
+        <div class="backgroundAnim"></div>
+    </div>
+    <div class="playerModeContainer">
+        <div class="music-container">
+            <img src="./audio_active.png" alt="" id="volume-logo">
+            
+            <div class="custom-controls">
+                <img src="./audio_pause.png" alt="" id="play-logo">
+                <div id="audio-timer"></div>
+                <input type="range"  id="audio-progress" min="0" max="1" step="0.1" value="0">
+                <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+        <audio loop src="./RetroFuture-Clean.mp3" type="audio/mpeg" id="loginAudio">
+        </audio>
+        
+        <div class="playerModeBody">
+            <div class="singleplayer">
+                <h1>Singleplayer</h1>
+                <img src="./ui/singleplayer.png" style="height:8vw; width: 5vw;"></img>
+            </div>
+            <div class="multiplayer">
+                <h1>Multiplayer</h1>
+                <img src="./ui/multiplayer.png" style="height:8vw; width: 9.5vw;"></img>
+            </div>
+        </div>
+    </div>
     <div id="loginContainer">
         <div class="musicContainer">
             <img src="" alt="" id="volumeLogo">
@@ -22,25 +48,16 @@
         </div>
         <audio loop src="" type="audio/mpeg" id="loginAudio"></audio>
         <div class="players">
-            <form>
-                <label for="">Player One</label>
-                <input type="text" placeholder="Enter name" id="playerInputOne" autofocus>
-                <label for="" id="customUploadButtonOne">
-                    <img src="" alt="Image preview" id="previewImageOne">
-                    <p>Profile image (optional)</p>
+            <form id="player" oninput="checkFormValidity()">
+                <label class="player_title">Player One</label>
+                <input type="text" placeholder="Enter name" class="playerInput" autofocus>
+                <label class="custom-upload-button">
+                    <img class="previewImage">
+                    <p class="previewText">Profile image (optional)</p>
                 </label>
-                <input type="file" id="fileInputOne">
-            </form>
-            <button type="submit" disabled>Play Tic-tac-to</button>
-            <form>
-                <label for="">Player Two</label>
-                <input type="text" placeholder="Enter name" id="playerInputTwo">
-                <label for="" id="customUploadButtonTwo">
-                    <img src="" alt="Image preview" id="previewImageTwo">
-                    <p>Profile image (optional)</p>
-                </label>
-                <input type="file" id="fileInputTwo">
-            </form>
+                <input type="file" class="fileInput">
+        </form>
+        <button id="playButton" type="submit" disabled>Play Tic Tac Toe</button>
         </div>
     </div>
     <div class="themeContainer" style="display:none">
