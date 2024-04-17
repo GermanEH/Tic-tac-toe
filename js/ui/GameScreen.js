@@ -9,10 +9,9 @@ export default function GameScreen(players, theme) {
   );
 
   const board = GameBoard();
-
   const game = GameController(players, theme, board);
-
-  renderPlayers(players, theme);
+  const { $playerOne, $playerTwo, $playerOneBoard, $playerTwoBoard } =
+    renderPlayers(players, theme);
 
   let $audio = document.getElementById('loginAudio');
   // let $playerBoard = document.createElement('img');
