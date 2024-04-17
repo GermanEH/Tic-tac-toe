@@ -1,4 +1,4 @@
-export default function setWeapons(theme) {
+export default function Weapons(theme) {
   let weapons = [];
 
   theme === 'Medieval'
