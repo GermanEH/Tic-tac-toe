@@ -13,6 +13,11 @@ export default function GameScreen(players, theme) {
   const { $playerOne, $playerTwo, $playerOneBoard, $playerTwoBoard } =
     renderPlayers(players, theme);
 
+  let $turn = document.querySelector('.turn');
+  let $board = document.querySelector('.board');
+  let $playerOneScore = document.createElement('div');
+  let $playerTwoScore = document.createElement('div');
+
   let $audio = document.getElementById('loginAudio');
   // let $playerBoard = document.createElement('img');
   // $playerBoard.src = './medieval_board_cut.jpg';
