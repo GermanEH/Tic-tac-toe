@@ -45,4 +45,15 @@ export default function GameScreen(players, theme) {
     game.resetScore();
     updateScreen();
   });
+
+  const renderScore = (players) => {
+    $playerOneScore.textContent = `Games won: ${game.getScore(
+      players[0].name
+    )}`;
+    $playerTwoScore.textContent = `Games won: ${game.getScore(
+      players[1].name
+    )}`;
+    $playerOneBoard.appendChild($playerOneScore);
+    $playerTwoBoard.appendChild($playerTwoScore);
+  };
 }
