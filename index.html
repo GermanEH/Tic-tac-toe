@@ -11,7 +11,7 @@
     <div class="bgAnimation" id="bgAnimation">
         <div class="backgroundAnim"></div>
     </div>
-    <div class="playerModeContainer">
+    <div class="loginContainer">
         <div class="music-container">
             <img src="./audio_active.png" alt="" id="volume-logo">
             
@@ -22,10 +22,10 @@
                 <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
             </div>
         </div>
-        <audio loop src="./RetroFuture-Clean.mp3" type="audio/mpeg" id="loginAudio">
+        <audio loop src="./RetroFuture-Clean.mp3" type="audio/mpeg" id="audio">
         </audio>
         
-        <div class="playerModeBody">
+        <div class="playerMode">
             <div class="singleplayer">
                 <h1>Singleplayer</h1>
                 <img src="./ui/singleplayer.png" style="height:8vw; width: 5vw;"></img>
@@ -35,18 +35,6 @@
                 <img src="./ui/multiplayer.png" style="height:8vw; width: 9.5vw;"></img>
             </div>
         </div>
-    </div>
-    <div id="loginContainer">
-        <div class="musicContainer">
-            <img src="" alt="" id="volumeLogo">
-            <div class="customControls">
-                <img src="" alt="" id="playLogo">
-                <div id="audioTimer"></div>
-                <input type="range" id="audioProgress" min="0" max="1" step="0.1" value="0">
-                <input type="range" id="volume" min="0" max="1" setp="0.1" value="1">
-            </div>
-        </div>
-        <audio loop src="" type="audio/mpeg" id="loginAudio"></audio>
         <div class="players">
             <form id="player" oninput="checkFormValidity()">
                 <label class="player_title">Player One</label>
@@ -59,10 +47,8 @@
         </form>
         <button id="playButton" type="submit" disabled>Play Tic Tac Toe</button>
         </div>
-    </div>
-    <div class="themeContainer" style="display:none">
         <h1>Select a Theme</h1>
-        <div class="theme_body">
+        <div class="theme">
             <div class="theme_card" data-name="medieval"><p>Medieval</p></div>
             <div class="theme_card" data-name="futuristic"><p>Futuristic</p></div>
             <div class="theme_card" data-name="vintage"><p>Vintage</p></div>
@@ -72,7 +58,6 @@
         <main>
             <div class="playerOne"></div>
             <div class="board"></div>
-            <div class="playerTwo"></div>
         </main>
         <div id="panel">
             <div class="turn"></div>

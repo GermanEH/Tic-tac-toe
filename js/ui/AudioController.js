@@ -1,5 +1,5 @@
 export default function AudioController() {
-  const loginAudio = document.getElementById('loginAudio');
+  const $audio = document.getElementById('audio');
   const audioTimer = document.getElementById('audio-timer');
   const audioProgress = document.getElementById('audio-progress');
   const playLogo = document.getElementById('play-logo');
@@ -8,17 +8,17 @@ export default function AudioController() {
   const customControls = document.querySelector('.custom-controls');
 
   function playAudio() {
-    loginAudio.play();
+    $audio.play();
     playLogo.src = './audio_pause.png';
   }
 
   function stopAudio() {
-    loginAudio.pause();
+    $audio.pause();
     playLogo.src = './audio_play.png';
   }
 
   playLogo.addEventListener('click', () => {
-    loginAudio.paused ? playAudio() : stopAudio();
+    $audio.paused ? playAudio() : stopAudio();
   });
 
   function formatTime(seconds) {
@@ -30,8 +30,8 @@ export default function AudioController() {
   }
 
   function updateTime() {
-    const currentTime = formatTime(loginAudio.currentTime);
-    const duration = formatTime(loginAudio.duration);
+    const currentTime = formatTime($audio.currentTime);
+    const duration = formatTime($audio.duration);
     audioTimer.textContent = `${currentTime} / ${duration}`;
   }
 
@@ -39,37 +39,37 @@ export default function AudioController() {
     if (e) {
       e.preventDefault();
       audioProgress.value = e.target.value;
-      loginAudio.currentTime = loginAudio.duration * parseFloat(e.target.value);
+      $audio.currentTime = $audio.duration * parseFloat(e.target.value);
     } else {
-      const progress = loginAudio.currentTime / loginAudio.duration;
+      const progress = $audio.currentTime / $audio.duration;
       audioProgress.value = `${progress}`;
     }
   }
 
   function turnOn() {
-    loginAudio.volume = 1;
+    $audio.volume = 1;
     volumeLogo.src = './audio_active.png';
   }
   function turnOff() {
-    loginAudio.volume = 0;
+    $audio.volume = 0;
     volumeLogo.src = './audio_silence.png';
   }
   function updateVolume(e) {
     if (e.target.value !== undefined) {
       e.preventDefault();
       volume.value = e.target.value;
-      loginAudio.volume = e.target.value;
+      $audio.volume = e.target.value;
       if (e.target.value === 0) {
         volumeLogo.src = './audio_silence.png';
       } else {
         volumeLogo.src = './audio_active.png';
       }
     } else {
-      loginAudio.volume === 0 ? turnOn() : turnOff();
+      $audio.volume === 0 ? turnOn() : turnOff();
     }
   }
 
-  loginAudio.addEventListener('timeupdate', () => {
+  $audio.addEventListener('timeupdate', () => {
     updateTime();
     updateProgressBar();
   });
@@ -109,5 +109,24 @@ export default function AudioController() {
     }, 1000);
   });
 
-  return { playAudio };
+  const gameAudio = (theme) => {
+    $audio.src =
+      theme === 'Medieval'
+        ? 'medieval_background.mp3'
+        : theme === 'Futuristic'
+        ? 'futuristic_audio.mp3'
+        : 'victorian_audio.mp3';
+    const play = () => $audio.play();
+    const pause = () => $audio.pause();
+    let $attackSound = document.createElement('audio');
+    $attackSound.src =
+      theme === 'Medieval'
+        ? 'sword_attack.mp3'
+        : theme === 'Futuristic'
+        ? 'spacecraft_attack.mp3'
+        : 'gun_attack.mp3';
+    return { play, pause, $attackSound };
+  };
+
+  return { playAudio, gameAudio };
 }
