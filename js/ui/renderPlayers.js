@@ -56,11 +56,17 @@ export default function renderPlayers(players, theme) {
     game.changeWeapon(players[0].name, weapons[this.selectedIndex].src);
   });
 
-  $playerOneBoard.appendChild($playerOneBoardColor);
-  $playerOneBoard.appendChild($playerOneBoardSelect);
+  $playerOneBoard.append($playerOneBoardColor, $playerOneBoardSelect);
 
-  $playerOne.appendChild($playerOnePicture);
-  $playerOne.appendChild($playerOneBoard);
+  $playerOne.append($playerOnePicture, $playerOneBoard);
+
+  if (players[0].profileImage) {
+    let $profileImageOne = document.createElement('img');
+    $profileImageOne.src = players[0].profileImage?.name;
+    $profileImageOne.style.width = '8vw';
+    $profileImageOne.style.height = '8vw';
+    $playerOne.appendChild($profileImageOne);
+  }
 
   //PlayerTwo
 
@@ -88,13 +94,6 @@ export default function renderPlayers(players, theme) {
     );
   });
 
-  if (players[0].profileImage) {
-    let $profileImageOne = document.createElement('img');
-    $profileImageOne.src = players[0].profileImage?.name;
-    $profileImageOne.style.width = '8vw';
-    $profileImageOne.style.height = '8vw';
-    $playerOne.appendChild($profileImageOne);
-  }
   if (players[1]?.profileImage) {
     let $profileImageTwo =
       $playerTwo.querySelector('img') || $playerTwo.createElement('img');
