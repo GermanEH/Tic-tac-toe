@@ -25,9 +25,9 @@ export default function renderPlayers(players, theme) {
   $playerOneBoard.classList.add('playerBoard');
   let $playerOneBoardSelect = document.createElement('select');
 
-  const playerOne = document.createElement('div');
-  playerOne.textContent = players[0].name;
-  $playerOneBoard.appendChild(playerOne);
+  const $playerOneName = document.createElement('div');
+  $playerOneName.textContent = players[0].name;
+  $playerOneBoard.appendChild($playerOneName);
 
   weapons.forEach((weapon) => {
     const $weapon = document.createElement('option');
@@ -70,8 +70,8 @@ export default function renderPlayers(players, theme) {
   let $main = document.querySelector('.gameContainer main');
   $main.appendChild($playerTwo);
   let $playerTwoBoard = $playerTwo.querySelector('.playerBoard');
-  const playerTwo = $playerTwo.querySelector('.playerBoard div');
-  playerTwo.textContent = players[1]?.name || 'Player Two';
+  const $playerTwoName = $playerTwo.querySelector('.playerBoard div');
+  $playerTwoName.textContent = players[1]?.name || 'Player Two';
   let $playerTwoBoardSelect = $playerTwo.querySelectorAll('select')[1];
   $playerTwoBoardSelect.addEventListener('change', function () {
     game.changeWeapon(
