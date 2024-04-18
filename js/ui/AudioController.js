@@ -109,5 +109,24 @@ export default function AudioController() {
     }, 1000);
   });
 
-  return { playAudio };
+  const gameAudio = (theme) => {
+    $audio.src =
+      theme === 'Medieval'
+        ? 'medieval_background.mp3'
+        : theme === 'Futuristic'
+        ? 'futuristic_audio.mp3'
+        : 'victorian_audio.mp3';
+    const play = () => $audio.play();
+    const pause = () => $audio.pause();
+    let $attackSound = document.createElement('audio');
+    $attackSound.src =
+      theme === 'Medieval'
+        ? 'sword_attack.mp3'
+        : theme === 'Futuristic'
+        ? 'spacecraft_attack.mp3'
+        : 'gun_attack.mp3';
+    return { play, pause, $attackSound };
+  };
+
+  return { playAudio, gameAudio };
 }

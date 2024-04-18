@@ -18,22 +18,9 @@ export default function GameScreen(players, theme) {
   let $playerOneScore = document.createElement('div');
   let $playerTwoScore = document.createElement('div');
 
-  let $audio = document.getElementById('loginAudio');
-  $audio.src =
-    theme === 'Medieval'
-      ? 'medieval_background.mp3'
-      : theme === 'Futuristic'
-      ? 'futuristic_audio.mp3'
-      : 'victorian_audio.mp3';
-  $audio.play();
+  const audio = AudioController().gameAudio(theme);
 
-  let $attackSound = document.createElement('audio');
-  $attackSound.src =
-    theme === 'Medieval'
-      ? 'sword_attack.mp3'
-      : theme === 'Futuristic'
-      ? 'spacecraft_attack.mp3'
-      : 'gun_attack.mp3';
+  audio.play();
 
   const restartBoard = document.getElementById('restartButton');
   restartBoard.addEventListener('click', () => {
@@ -99,11 +86,11 @@ export default function GameScreen(players, theme) {
     const selectedCell = e.target.dataset.cellIndex;
     const cells = document.querySelectorAll('button');
     const winner = game.playTurn(selectedCell);
-    $audio.pause();
+    audio.pause();
 
-    $attackSound.play();
+    audio.$attackSound.play();
 
-    $audio.play();
+    audio.play();
     if (winner) {
       const cells = document.querySelectorAll('button');
       updateScreen(winner);
