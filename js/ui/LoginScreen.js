@@ -77,16 +77,43 @@ export default function LoginScreen(playerMode) {
         reader.readAsDataURL(file);
       }
     });
+  } else {
+    const $dificultyLevel = document.createElement('form');
+    const levels = ['easy', 'intermediate', 'hard'];
+    levels.forEach((level) => {
+      const $level = document.createElement('button');
+      $level.style.pointerEvents = 'auto';
+      $level.style.display = 'grid';
+      $level.textContent = level;
+      $level.addEventListener('click', (e) => {
+        e.preventDefault();
+        selectedLevel = level;
+        checkFormValidity();
+      });
+      $dificultyLevel.appendChild($level);
+    });
+    $players.appendChild($dificultyLevel);
   }
 
   function checkFormValidity() {
-    if (
-      document.querySelector('playerInput').value.trim() !== '' &&
-      $playerTwo.querySelector('playerInput').value !== ''
-    ) {
-      enablePlayButton();
+    if (playerMode === 'multiplayer') {
+      if (
+        document.querySelector('playerInput').value.trim() !== '' &&
+        $playerTwo.querySelector('playerInput').value !== ''
+      ) {
+        enablePlayButton();
+      } else {
+        disablePlayButton();
+      }
     } else {
-      disablePlayButton();
+      if (
+        document.querySelector('.playerInput').value.trim() !== '' &&
+        selectedLevel
+      ) {
+        enablePlayButton();
+      } else {
+        disablePlayButton();
+      }
     }
   }
   function enablePlayButton() {
