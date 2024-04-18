@@ -14,9 +14,6 @@ export default function renderPlayers(players, theme) {
       : theme === 'Futuristic'
       ? 'url(./ui/frames/futuristic_frame.png)'
       : 'url(./ui/frames/vintage_frame.png)';
-  $playerOnePicture.style.backgroundSize = 'contain';
-  $playerOnePicture.style.backgroundRepeat = 'no-repeat';
-  $playerOnePicture.classList.add('playerPicture');
   $playerOnePicture.classList.add('playerPicture');
   let $playerOneBoard = document.createElement('div');
   $playerOneBoard.style.background =
@@ -25,8 +22,6 @@ export default function renderPlayers(players, theme) {
       : theme === 'Futuristic'
       ? 'url(./futuristic_panel.jpg)'
       : 'url(./vintage_board.png)';
-  $playerOneBoard.style.backgroundRepeat = 'no-repeat';
-  $playerOneBoard.style.backgroundSize = 'contain';
   $playerOneBoard.classList.add('playerBoard');
   let $playerOneBoardSelect = document.createElement('select');
 
