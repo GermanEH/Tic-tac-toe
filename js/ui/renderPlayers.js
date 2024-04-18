@@ -95,5 +95,18 @@ export default function renderPlayers(players, theme) {
     $profileImageTwo.src = players[1].profileImage.name;
   }
 
-  return { $playerOne, $playerTwo, $playerOneBoard, $playerTwoBoard };
+  let $playerOneScore = document.createElement('div');
+  let $playerTwoScore = document.createElement('div');
+  const renderScore = (players) => {
+    $playerOneScore.textContent = `Games won: ${game.getScore(
+      players[0].name
+    )}`;
+    $playerTwoScore.textContent = `Games won: ${game.getScore(
+      players[1]?.name || 'Player Two'
+    )}`;
+    $playerOneBoard.appendChild($playerOneScore);
+    $playerTwoBoard.appendChild($playerTwoScore);
+  };
+
+  return { $playerOne, $playerTwo, renderScore };
 }
